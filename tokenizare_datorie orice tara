@@ -1,0 +1,96 @@
+import time
+import random
+
+class INMDSSystem:
+    def __init__(self, country_name, initial_debt, initial_gdp):
+        self.country_name = country_name
+        self.total_debt = initial_debt          # Datoria suverana initiala (USD)
+        self.gdp = initial_gdp                  # PIB-ul initial (USD)
+        self.token_supply = 0                   # Numarul de token-uri emise ($SBR)
+        self.token_price = 10.0                 # Pretul unui token ($10)
+        self.investors = {}                     # Evidenta detinatorilor de token-uri
+        self.production_surplus_fund = 0.0      # Fondul de supra-productivitate generat de IA
+        
+    def status_raport(self, an):
+        print(f"\n--- RAPORT ANUAL INMDS: ANUL {an} ({self.country_name}) ---")
+        print(f"PIB Curent:             ${self.gdp:,.2f}")
+        print(f"Datorie Rămasă:         ${self.total_debt:,.2f}")
+        print(f"Token-uri în Circulație:{self.token_supply:,.0f} SBR")
+        print(f"Fond Surplus IA:        ${self.production_surplus_fund:,.2f}")
+        print("-" * 50)
+
+    # Etapa 1: Tokenizarea Datoriei și Listarea Publică
+    def tokenizare_datorie(self, procent_tokenizat=0.80):
+        print(f"\n[AI-INMDS] Inițiere protocol de tokenizare pentru {procent_tokenizat*100}% din datorie...")
+        datorie_de_convertit = self.total_debt * procent_tokenizat
+        self.token_supply = datorie_de_convertit / self.token_price
+        print(f"[SUCCESS] S-au emis {self.token_supply:,.0f} token-uri de tip SBR la valoarea nominală de ${self.token_price} fiecare.")
+        # Restul de 20% ramane datorie clasica catre organisme majore (FMI etc.)
+        self.total_debt -= datorie_de_convertit 
+
+    def cumpara_tokeni_public(self, investor_id, suma_investita):
+        numar_tokeni = suma_investita / self.token_price
+        if numar_tokeni <= self.token_supply:
+            self.investors[investor_id] = self.investors.get(investor_id, 0) + numar_tokeni
+            print(f"[INVESTIȚIE] Investitorul '{investor_id}' a cumpărat {numar_tokeni:,.0f} SBR (Investiție: ${suma_investita:,.2f})")
+        else:
+            print(f"[EROARE] Nu sunt suficiente token-uri disponibile pentru {investor_id}.")
+
+    # Etapa 2: Simulare Supra-Productivitate Generată de IA (Mecanismul 1)
+    def ruleaza_optimizare_ia(self, an):
+        print(f"\n[AI-CAIO] Rularea algoritmilor de optimizare energetică și industrială (Anul {an})...")
+        # IA creste PIB-ul prin automatizare si reduce risipa bugetara
+factor_crestere_ia = random.uniform(0.12, 0.22) # Creștere a PIB-ului cu 12-22% pe an
+        crestere_pib = self.gdp * factor_crestere_ia
+        self.gdp += crestere_pib
+        
+        # 40% din cresterea PIB-ului generata de IA este direcționată în fondul de răscumpărare
+        surplus_generat = crestere_pib * 0.40
+        self.production_surplus_fund += surplus_generat
+        print(f"[AI-OPTIMIZARE] PIB crescut cu {factor_crestere_ia*100:.1f}%. Surplus generat pentru datorie: ${surplus_generat:,.2f}")
+
+    # Etapa 3: Smart Contract de Răscumpărare și "Burn" (Stingerea Datoriei)
+    def smart_contract_rascumparare_automata(self):
+        print(f"\n[SMART CONTRACT] Executare rutină automată de răscumpărare (Burn Mechanism)...")
+        if self.production_surplus_fund > 0 and self.token_supply > 0:
+            fond_alocat = self.production_surplus_fund * 0.80 # 80% din surplus se folosește pentru răscumpărare
+            tokeni_de_rascumparat = fond_alocat / self.token_price
+            
+            if tokeni_de_rascumparat > self.token_supply:
+                tokeni_de_rascumparat = self.token_supply
+                
+            valoare_stinsa = tokeni_de_rascumparat * self.token_price
+            self.token_supply -= tokeni_de_rascumparat
+            self.production_surplus_fund -= valoare_stinsa
+            
+            print(f"[BURN SUCCESS] S-au răscumpărat și distrus digital {tokeni_de_rascumparat:,.0f} SBR în valoare de ${valoare_stinsa:,.2f}.")
+        else:
+            print(f"[INFO] Fond insuficient sau toate token-urile au fost stinse.")
+
+# --- SIMULARE PRACTICĂ (EXEMPLU DE RULARE) ---
+if __name__ == "__main__":
+    # Inițializăm un stat ipotetic cu o datorie de 10 Miliarde USD și un PIB de 15 Miliarde USD
+    stat = INMDSSystem(country_name="Republica Hypothetica", initial_debt=10_000_000_000, initial_gdp=15_000_000_000)
+    
+    stat.status_raport(an=0)
+    
+    # Pasul 1: Tokenizarea a 80% din datorie și listarea publică
+    stat.tokenizare_datorie(procent_tokenizat=0.80)
+    
+    # Pasul 2: Cetățenii, diaspora și investitorii cumpără token-urile listate public
+    stat.cumpara_tokeni_public("Diaspora Fond US", 2_000_000_000)
+    stat.cumpara_tokeni_public("Retail Public Global", 4_000_000_000)
+    stat.cumpara_tokeni_public("Fonduri Pensii Locale", 2_000_000_000)
+    
+    stat.status_raport(an=1)
+    
+    # Pasul 3: Rularea simulării pe o perioadă de 3 ani de supra-productivitate condusă de IA
+    for an_curent in range(1, 4):
+        print(f"\n==========================================")
+        print(f"       ÎNCEPUTUL ANULUI DE LUCRU {an_curent}")
+        print(f"==========================================")
+        
+        stat.ruleaza_optimizare_ia(an=an_curent)
+        stat.smart_contract_rascumparare_automata()
+        stat.status_raport(an=an_curent)
+        time.sleep(0.5) # Simulare pauză temporală
