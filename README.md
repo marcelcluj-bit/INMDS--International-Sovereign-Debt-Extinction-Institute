@@ -1,0 +1,2 @@
+# INMDS--International-Sovereign-Debt-Extinction-Institute
+Demonstrates sovereign debt tokenization, multi-sector AI-driven surplus generation      (Agriculture + Industry), and automated smart-contract redemption (burn mechanism).     Scalable to mega-economies with trillions in debt (e.g., USA, Japan), accommodating      un-purchased token reserves and multi-tier investor, banks, investment firms 
