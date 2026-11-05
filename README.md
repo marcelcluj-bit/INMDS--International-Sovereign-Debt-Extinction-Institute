@@ -208,6 +208,4 @@ Oferă acces egal tuturor la achiziția de tokeni de la primul pas, eliminând p
 Ce oprește o comunitate locală să testeze de mâine?
 Absolut nimic. Codul este gratuit pe GitHub, oricine poate lua arhitectura și o poate testa la scară pilot.
 
-
-
-
+[![PayPal](https://img.shields.io/badge/Donate-PayPal-00457C?style=for-the-badge&logo=paypal)](https://paypal.me/marcelcluj) For Succes !!!
